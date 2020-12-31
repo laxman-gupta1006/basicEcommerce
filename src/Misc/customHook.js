@@ -5,16 +5,11 @@ import { Cart } from './Cart.Context';
 function CartReducer(prevState,action){
    switch(action.type){
       case 'ADD':{
-         let cartadd={...prevState}
-         cartadd[action.Item.id]=action.Item
-         return cartadd
+         return [...prevState,action.Item.id]
       }
       case 'REMOVE':{
-        delete prevState[action.Item.id]
-        return prevState
-         
-      //    return prevState.filter((Itemid)=>
-      //       Itemid.id!==action.Item.id);
+         return prevState.filter((Itemid)=>
+            Itemid!==action.Item.id);
       }
    }
 }
@@ -29,7 +24,6 @@ function usePersistedReducer(reducer,initialState,key){
 
    useEffect(()=>{
       localStorage.setItem(key,JSON.stringify(state));
-      console.log(state)
    },[state,key]);
    return [state,dispatch];
 }

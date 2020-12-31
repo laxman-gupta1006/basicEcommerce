@@ -25,7 +25,7 @@ export const Home = () =>
 </div> */}<BrowserRouter>
           <Switch>
              
-            <Route exact path="/category">
+            <Route exact path="/category/:category">
               <div className="container">
                 <Filter />
                 <ItemGrid/>

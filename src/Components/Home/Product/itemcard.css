@@ -20,7 +20,7 @@ object-fit:fill;
    box-shadow: 0px 0px 5px grey;
    border-radius: 5px;
    overflow: hidden;
-   max-height: 320px;
+   max-height: 332px;
 }
 .description{
    padding: 5px;

@@ -1,20 +1,20 @@
 import React from 'react'
-import { Checkbox, CheckboxGroup } from 'rsuite'
+import { Checkbox, CheckboxGroup} from 'rsuite'
 import filter from '../../../filter.png'
+import Slider from './Slider'
 
 export const Filter = () => {
    return (
       <div className="filter">
-         <h5><img src={filter} alt="filter" height="18px"/> Filter</h5>
+         <h4><img src={filter} alt="filter" height="18px"/> Filter</h4>
       <CheckboxGroup
       name="checkboxList"
       // value={["A","B"]}
       onChange={()=>{}}
     >
-      <Checkbox value="A">Item A</Checkbox>
-      <Checkbox value="B">Item B</Checkbox>
-      <Checkbox value="C">Item C</Checkbox>
-      <Checkbox value="D">Item D</Checkbox>
+      <Slider/>
+      <Checkbox value="B">In stock</Checkbox>
+      <Checkbox value="D">Delivery available</Checkbox>
     </CheckboxGroup>
     </div>
    )

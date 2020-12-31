@@ -22,10 +22,12 @@ const Categorys=[
    return Categorys.map(category=>
    {
      return(
-       <div className="categorys">
+       <div className="categorys" onClick={()=>{window.location.href=`category/${category.name}`}}>
           <img src={category.img} className="catimg" alt={category.name}/>
+          <div className="aboutcategory">
           <h3>{category.name}</h3>
           <h5>{category.description}</h5>
+          </div>
        </div>
      )
    }

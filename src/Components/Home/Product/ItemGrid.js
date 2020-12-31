@@ -2,6 +2,7 @@ import React from "react";
 import { useCart } from "../../../Misc/customHook";
 import { Cart } from "../../../Misc/Cart.Context";
 import { ItemCard } from "./ItemCard";
+import { Alert } from "rsuite";
 
 const items = [
   {
@@ -75,10 +76,15 @@ const items = [
 export const ItemGrid = () => {
    const {setCart}=Cart();
   const [cart, dispatchCart] = useCart();
+  console.log(cart)
   const renderItems = () => {
     return items.map((item) => {
       const onCartClick = () => {
-        const isAdded = cart[item.id]!==undefined;
+        if(!item.inStock){
+          Alert.info("Item is out of stock",4000)
+          return
+        }
+        const isAdded = cart.includes(item.id);
         if (isAdded) {
           dispatchCart({ type: "REMOVE",Item: item});
           setTimeout(()=>{
@@ -86,8 +92,6 @@ export const ItemGrid = () => {
           },100)
           
         } else {
-          let iteml={};
-          iteml[item.id]=item
           dispatchCart({ type: "ADD",Item: item });
           setTimeout(()=>{
             setCart(JSON.parse(localStorage.getItem('cart')))
@@ -108,6 +112,5 @@ export const ItemGrid = () => {
       />;
     });
   };
-  console.log(cart)
   return <div className="items">{renderItems()}</div>;
 };
