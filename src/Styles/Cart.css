@@ -1,0 +1,33 @@
+.cartbox{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   width: 100%;
+}
+.carttable{
+   padding: 5px;
+}
+.carttable td,th{
+ text-align: center;
+}
+.cartitem{
+   display: flex;
+   flex-direction: row;
+}
+.cartitem img{
+   margin: 10px;
+   border-radius: 5px;
+   box-shadow: 0px 0px 2px gray;
+}
+.productdes{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+}
+@media only screen and (max-width: 768px){
+   .carttable{
+      width: 100%;
+   }
+}

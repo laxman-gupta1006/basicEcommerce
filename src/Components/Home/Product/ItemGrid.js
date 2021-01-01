@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useCart } from "../../../Misc/customHook";
 import { Cart } from "../../../Misc/Cart.Context";
 import { ItemCard } from "./ItemCard";
 import { Alert } from "rsuite";
+import { useParams } from "react-router";
 
 const items = [
   {
@@ -73,18 +74,34 @@ const items = [
   },
 ];
 
-export const ItemGrid = () => {
+export const ItemGrid = ({filterinstock,filterdelivery}) => {
    const {setCart}=Cart();
   const [cart, dispatchCart] = useCart();
-  console.log(cart)
+  const {categoryId}=useParams();
+  const [products,setProducts]=useState([]);
+  useEffect(()=>{
+    let productsFilter=items.filter(item=>item.categoryId===categoryId);
+    if(filterinstock){
+      productsFilter=productsFilter.filter(item=>item.inStock===true)
+    }
+    if(filterdelivery){
+      productsFilter=productsFilter.filter(item=>item.delivery===true)
+    }
+    setProducts(productsFilter)
+  },[categoryId,filterdelivery,filterinstock])
+
   const renderItems = () => {
-    return items.map((item) => {
+    if(products.length===0){
+      return <div className="d-flex justify-content-center align-items-center"><h6> Not found !</h6></div>
+    }
+    return products.map((item) => {
       const onCartClick = () => {
         if(!item.inStock){
           Alert.info("Item is out of stock",4000)
           return
         }
-        const isAdded = cart.includes(item.id);
+        const isAdded = cart.includes(item);
+        item["quantity"]=1;
         if (isAdded) {
           dispatchCart({ type: "REMOVE",Item: item});
           setTimeout(()=>{
@@ -109,6 +126,7 @@ export const ItemGrid = () => {
         inStock={item.inStock}
         categoryId={item.categoryId}
         onCartClick={() => onCartClick}
+        key={item.id}
       />;
     });
   };
