@@ -34,7 +34,7 @@ export const CartView = () => {
               }, 100);
             };
             const updateQuantity = (e) => {
-             if(e==0){
+             if(parseInt(e)===0){
                dispatchCart({ type: "REMOVE", Item: item });
              }else
              { dispatchCart({ type: "UPDATE", quantity: e, Item: item });}
